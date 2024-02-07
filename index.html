@@ -23,7 +23,7 @@
 							<ul>
 								<li><a href="#">Parcelles</a></li>
 								<li><a href="#">Culture</a></li>
-								<li><a href="#">Propriétaires</a></li>
+								<li><a href="#" id="proprietaires">Propriétaires</a></li>
 								
 							</ul>
 						</nav>
@@ -210,6 +210,20 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				document.getElementById('proprietaires').addEventListener('click', function() {
+					fetch('https://back-production-47b0.up.railway.app/Utilisateur/getAll')
+						.then(response => response.json())
+						.then(data => {
+							let content = document.getElementById('content');
+							content.innerHTML = '';
+							data.forEach(user => {
+								content.innerHTML += `<p>${user.name}</p>`;
+							});
+						})
+						.catch(error => console.error('Error:', error));
+				});
+			</script>
 
 	</body>
 </html>
